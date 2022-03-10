@@ -4,8 +4,11 @@ import "./tailwind.css";
 
 function App() {
   return (
-    <div className="bg-green-700">
+    <div className="bg-green-700 text-5xl">
       hello
+      <span className="text-5xl">
+        span
+      </span>
     </div>
   )
 }
