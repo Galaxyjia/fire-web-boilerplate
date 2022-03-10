@@ -29,13 +29,82 @@ npx tailwindcss init -p
 
 ## 8、修改vite.config.ts
 ```
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-```
+import { resolve } from 'path' //必须要引入resolve 
 
-## 9、
-```
-```
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
 
-## 10、
+  //必须要引入resolve 
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: resolve(__dirname, 'src')
+      },
+      {
+        find: "@assets",
+        replacement: resolve(__dirname, 'src/assets')
+      }
+    ]
+  }
+})
+```
+主要增加resolve相关
+
+## 9、tsconfig.json
+```
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [ "src/*" ],
+      // "@/assets/*": [ "src/assets/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+增加baseUrl和paths
+
+## 10、修改tailwink.config.js
+```
+module.exports = {
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  content: [],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+增加purge
+## 11、新建tailwind.css,内容：
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+## 12、
 ```
 ```
